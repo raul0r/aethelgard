@@ -1,78 +1,46 @@
-/**
- * 📜 The Sacred Schema of Aethelgard
- * This file defines the structure of the user's "Memory File."
- */
-
-export type StatCategory = 'Vitality' | 'Wisdom' | 'Fortune' | 'Charisma';
-
 export type QuestDifficulty = 'Trivial' | 'Easy' | 'Medium' | 'Hard' | 'Epic' | 'Legendary';
-
-export type QuestStatus = 'Available' | 'In-Progress' | 'Completed' | 'Failed' | 'Abandoned';
+export type StatCategory = 'Vitality' | 'Wisdom' | 'Fortune' | 'Charisma';
+export type QuestStatus = 'In-Progress' | 'Completed' | 'Failed';
 
 export interface Quest {
   id: string;
   title: string;
-  description?: string;
+  description: string;
   category: StatCategory;
   difficulty: QuestDifficulty;
   status: QuestStatus;
   xpReward: number;
   goldReward: number;
-  dueDate?: string; // ISO string
   isRecurring: boolean;
-  recurrenceInterval?: 'daily' | 'weekly' | 'monthly';
   createdAt: string;
   completedAt?: string;
 }
 
-export interface Ritual {
-  id: string;
-  name: string;
-  category: StatCategory;
-  currentStreak: number;
-  lastCompleted?: string; // ISO date
-  xpValue: number;
-}
-
-export interface CharacterStats {
+export interface UserStats {
   level: number;
   xp: number;
   nextLevelXp: number;
   gold: number;
-  attributes: Record<StatCategory.toLowerCase() & string, number>;
-  class: string;
   title: string;
+  attributes: {
+    vitality: number;
+    wisdom: number;
+    fortune: number;
+    charisma: number;
+  };
 }
 
-export interface NarrativeContext {
-  currentArc: string;
-  longTermGoals: string[];
-  dmNotes: string; // This is where the AI stores its "vibe" of the player
-  lastAIGeneratedReview?: string;
-}
-
-export interface MemoryFile {
-  version: string;
+export interface UserMemory {
   playerName: string;
-  stats: CharacterStats;
+  playerClass: string;
+  stats: UserStats;
   activeQuests: Quest[];
-  completedQuestsCount: number;
-  rituals: Ritual[];
-  inventory: {
-    unclaimedRewards: Array<{
-      id: string;
-      tier: 'Common' | 'Rare' | 'Epic' | 'Legendary';
-      name: string;
-      description: string;
-    }>;
+  completedQuests: Quest[];
+  narrative: {
+    currentArc: string;
+    logs: string[];
   };
-  talents: {
-    unlockedIds: string[];
-  };
-  narrative: NarrativeContext;
-  snapshots: Array<{
-    date: string;
-    level: number;
-    stats: Record<string, number>;
-  }>;
 }
+
+// Ensure the file ends with a clean export if needed, 
+// but usually just the interfaces are enough.
