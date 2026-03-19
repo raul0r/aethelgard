@@ -33,10 +33,9 @@ export const StatBars: React.FC = () => {
       <div className="attributes-grid">
         {Object.entries(stats.attributes).map(([attr, value]) => (
           <div key={attr} className="attribute-item">
-            <div className={`attr-icon ${attr}`} />
             <div className="attr-info">
-              <span className="attr-label">{attr.toUpperCase()}</span>
-              <span className="attr-value">{value}</span>
+              <span className="attr-label">{String(attr).toUpperCase()}</span>
+              <span className="attr-value">{String(value)}</span>
             </div>
           </div>
         ))}

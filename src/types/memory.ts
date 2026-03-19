@@ -22,6 +22,7 @@ export interface UserStats {
   nextLevelXp: number;
   gold: number;
   title: string;
+  class?: string;
   attributes: {
     vitality: number;
     wisdom: number;
@@ -42,5 +43,20 @@ export interface UserMemory {
   };
 }
 
-// Ensure the file ends with a clean export if needed, 
-// but usually just the interfaces are enough.
+/** Flat structure used by the store and app (matches initialMemory) */
+export interface MemoryFile {
+  version: string;
+  playerName: string;
+  stats: UserStats;
+  activeQuests: Quest[];
+  completedQuestsCount: number;
+  rituals: unknown[];
+  inventory: { unclaimedRewards: unknown[] };
+  talents: { unlockedIds: string[] };
+  narrative: {
+    currentArc: string;
+    longTermGoals: string[];
+    dmNotes: string;
+  };
+  snapshots: unknown[];
+}

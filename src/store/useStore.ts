@@ -58,10 +58,10 @@ export const useStore = create<AethelgardState>()(
 
       completeQuest: (questId) =>
         set((state) => {
-          const quest = state.memory.activeQuests.find((q) => q.id === questId);
+          const quest = state.memory.activeQuests.find((q: Quest) => q.id === questId);
           if (!quest) return state;
 
-          const updatedQuests = state.memory.activeQuests.filter((q) => q.id !== questId);
+          const updatedQuests = state.memory.activeQuests.filter((q: Quest) => q.id !== questId);
           
           return {
             memory: {

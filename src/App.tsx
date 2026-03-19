@@ -3,6 +3,7 @@ import { Grimoire } from './components/layout/Grimoire';
 import { QuestCard } from './components/dashboard/QuestCard';
 import { StatBars } from './components/character/StatBars';
 import { useStore } from './store/useStore';
+import { Quest } from './types/memory';
 import './assets/textures/grimoire.css';
 
 const App: React.FC = () => {
@@ -39,7 +40,7 @@ const App: React.FC = () => {
           </div>
           
           <div className="quest-list">
-            {memory.activeQuests.map((quest) => (
+            {memory.activeQuests.map((quest: Quest) => (
               <QuestCard key={quest.id} quest={quest} />
             ))}
             
